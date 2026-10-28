@@ -1,10 +1,11 @@
 {
   "name": "redline-auto-spa",
   "private": true,
+  "engines": { "node": ">=22.13" },
   "scripts": {
     "install:all": "npm install && npm install --prefix backend && npm install --prefix frontend",
     "dev": "concurrently -n api,web -c red,white \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
-    "build": "npm run build --prefix frontend",
+    "build": "npm install --prefix backend && npm install --include=dev --prefix frontend && npm run build --prefix frontend",
     "start": "npm start --prefix backend"
   },
   "devDependencies": { "concurrently": "^9.0.1" }

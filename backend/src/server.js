@@ -1,3 +1,6 @@
+import path from 'node:path';
+import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import express from 'express';
 import cors from 'cors';
 import { db } from './db.js';
@@ -93,6 +96,12 @@ app.get('/api/admin/stats', auth, (_req, res) => {
       WHERE s.active = 1 GROUP BY s.id`).all(),
   });
 });
+
+const dist = fileURLToPath(new URL('../../frontend/dist', import.meta.url));
+if (fs.existsSync(dist)) {
+  app.use(express.static(dist));
+  app.get('*', (_req, res) => res.sendFile(path.join(dist, 'index.html')));
+}
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Redline API on http://localhost:${port}`));

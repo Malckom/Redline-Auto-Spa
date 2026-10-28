@@ -1,8 +1,7 @@
 import { DatabaseSync } from 'node:sqlite';
 import { fileURLToPath } from 'node:url';
 
-export const db = new DatabaseSync(fileURLToPath(new URL('../redline.db', import.meta.url)));
-db.exec('PRAGMA journal_mode = WAL');
+export const db = new DatabaseSync(process.env.DB_PATH || fileURLToPath(new URL('../redline.db', import.meta.url)));db.exec('PRAGMA journal_mode = WAL');
 db.exec(`
 CREATE TABLE IF NOT EXISTS staff (id INTEGER PRIMARY KEY, name TEXT NOT NULL, active INTEGER DEFAULT 1);
 CREATE TABLE IF NOT EXISTS customers (
