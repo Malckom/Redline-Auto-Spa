@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { background: #050505; color: #e5e7eb; font-family: 'Hanken Grotesk', sans-serif; }
+  :focus-visible { outline: 2px solid #ef4444; outline-offset: 2px; }
+}
+@layer components {
+  .metal { background: linear-gradient(180deg, #fff 0%, #e5e7eb 40%, #8b9099 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .btn-red { @apply inline-flex items-center justify-center rounded-sm bg-gradient-to-r from-redline to-redline-hot px-6 py-3 font-display font-semibold italic text-white transition hover:brightness-110 disabled:opacity-50; }
+  .btn-ghost { @apply inline-flex items-center justify-center rounded-sm border border-platinum/30 px-5 py-2.5 text-platinum transition hover:border-platinum; }
+  .field { @apply w-full rounded-sm border border-line bg-obsidian px-3 py-2.5 text-platinum placeholder:text-steel/60 focus:border-redline-hot focus:outline-none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .streak { animation: streak 1.4s cubic-bezier(.2,.7,.1,1) both; }
+  @keyframes streak { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+}
